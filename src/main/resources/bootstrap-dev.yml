@@ -1,0 +1,52 @@
+nacos:
+  group: ETOCRM-JAVA-DEV
+  namespace: etocrm-java-dev
+spring:
+  cloud:
+    nacos:
+      server-addr: 10.100.20.243:8848
+      discovery:
+        group: ${nacos.group}
+        namespace: ${nacos.namespace}
+      config:
+        file-extension: yml
+        group: ${nacos.group}
+        namespace: ${nacos.namespace}
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    hikari:
+      auto-commit: true
+      connection-test-query: SELECT 1
+      connection-timeout: 30000
+      idle-timeout: 180000
+      max-lifetime: 1800000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      pool-name: MyHikariCP
+    type: com.zaxxer.hikari.HikariDataSource
+#    url: jdbc:mysql://10.100.20.243:3306/marketing?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+#    username: dev_root
+#    password: D0tC3^v_LYw$24LY
+    url: jdbc:mysql://10.100.20.113:4000/marketing_dev?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: dev_root
+    password: $x:wM.6h>gcS
+  jpa:
+    database: MySQL
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+  redis:
+    database: 10
+    host: 10.100.20.243
+    port: 6379
+    password: 123456
+knife4j:
+  production: false
+  enable: true
+logging:
+  level:
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+  file:
+    name: logs/${spring.application.name}_out.log
